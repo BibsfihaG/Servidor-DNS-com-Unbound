@@ -1,4 +1,4 @@
-# 🌐 Servidor DNS Recursivo e Autoritativo Local com Unbound
+# 🌐 Servidor DNS Autoritativo Local com Unbound
 
 Repositório contendo a configuração do **Unbound DNS** para resolução de nomes em um ambiente com **múltiplas sub-redes** (dual-homed), incluindo suporte a zonas locais estáticas e aliases (CNAME).
 
