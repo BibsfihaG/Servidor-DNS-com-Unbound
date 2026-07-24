@@ -25,3 +25,5 @@ O servidor foi configurado para atender consultas DNS de duas redes distintas, c
 * Restrições de segurança via `access-control`.
 * Definição de zonas locais estáticas (`local-zone`).
 * Mapeamento de registros do tipo **A** e **CNAME** (`local-data`).
+
+![Demonstração do Unbound](images/configuração.png)
