@@ -1,29 +1,34 @@
 # 🌐 Servidor DNS Autoritativo Local com Unbound
 
-Repositório contendo a configuração do **Unbound DNS** para resolução de nomes em um ambiente com **múltiplas sub-redes** (dual-homed), incluindo suporte a zonas locais estáticas e aliases (CNAME).
+Repositório contendo a configuração otimizada do **Unbound DNS** para resolução de nomes e gerenciamento de rede em um ambiente multi-sub-rede (*dual-homed*), com suporte a controle remoto via CLI, zonas locais estáticas e regras estritas de segurança.
 
 ---
 
 ## 🛠️ Tecnologias e Ferramentas
 * **Linux / Debian / Ubuntu**
 * **Unbound DNS Server**
+* **unbound-control** (Gerenciamento CLI)
 
 ---
 
-## 📐 Topologia / Cenário
-O servidor foi configurado para atender consultas DNS de duas redes distintas, com controle de acesso rigoroso e registros customizados:
+## 📐 Topologia e Zonas de Rede
+O servidor atende a consultas DNS de duas sub-redes distintas, mapeando registros **A** e aliases **CNAME** personalizados:
 
-* **Rede A:** `172.31.0.0/16` (Zona: `dns.teste.local`)
-* **Rede B:** `192.168.1.0/24` (Zona: `android.local`)
+* **Sub-rede A:** `172.31.0.0/16` ➔ Zona: `dns.internal.`
+* **Sub-rede B:** `192.168.1.0/24` ➔ Zona: `dns.domestico.`
 * **Loopback:** `127.0.0.0/8`
 
 ---
 
-## ⚙️ Principais Funcionalidades Configurações
+## ⚙️ Destaques da Configuração (`unbound.conf`)
 
-* Escuta em todas as interfaces de rede (`interface: 0.0.0.0`).
-* Restrições de segurança via `access-control`.
-* Definição de zonas locais estáticas (`local-zone`).
-* Mapeamento de registros do tipo **A** e **CNAME** (`local-data`).
+* **Controle Remoto Habilitado:** Configuração da interface de gerenciamento via `unbound-control` (porta `8953`).
+* **Segurança Reforçada:** Regra explícita de negação genérica (`access-control: 0.0.0.0/0 deny`), permitindo acesso apenas para as sub-redes autorizadas.
+* **Suporte a Protocolos:** Atuação nas portas DNS padrões via **UDP** e **TCP** (IPv4 ativo e IPv6 desativado).
+* **Mapeamento de Zonas Locais:** Resolução estática para hosts locais (`pc-server`, `pc-desktop`, `a16`) e aliases organizados.
+
+---
+
+## 📸 Configuração Final
 
 ![Demonstração do Unbound](images/configuração.png)
